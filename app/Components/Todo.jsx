@@ -1,19 +1,19 @@
 import React from 'react';
 
-const Todo = () => {
+const Todo = ({ id, title, description, mongoId, complete }) => {
   return (
     <tr className="">
       <th scope="row" className="px-6 py-4 font-medium">
-        1
+        {id + 1}
       </th>
       <td className="px-6 py-4">
-        Study
+        {title}
       </td>
       <td className="px-6 py-4">
-        Learn Next Js
+        {description}
       </td>
       <td className="px-6 py-4">
-        Pending
+        {complete?"Completed":"Pending"}
       </td>
       <td className="px-6 py-4 flex gap-1 ">
         <button className='py-2 px-4 bg-red-500 text-white rounded'>Delete</button>

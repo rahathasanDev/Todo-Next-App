@@ -1,14 +1,24 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Todo from "./Components/Todo";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 
 export default function Home() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
   });
+
+  const [todoData, setTodoData] = useState([]);
+  const fetchTodos = async () => {
+    const response = await axios('/api');
+    setTodoData(response.data.todos)
+  }
+  useEffect(() => {
+    fetchTodos();
+  }, [])
   const onChangeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -19,8 +29,14 @@ export default function Home() {
     e.preventDefault();
     try {
       // api code here 
+      const response = await axios.post('/api', formData)
 
-      toast.success('Success')
+      toast.success(response.data.msg);
+      setFormData({
+        title: "",
+        description: "",
+      })
+
     } catch (error) {
       toast.error('Error')
 
@@ -29,7 +45,7 @@ export default function Home() {
   }
   return (
     <>
-      <ToastContainer theme="dark"/>
+      <ToastContainer theme="dark" />
       <form onSubmit={onSubmitHandler} className="flex flex-col items-start gap-2 w-[80%] max-w-[600px] mt-24 px-2 mx-auto" >
         <input value={formData.title} onChange={onChangeHandler} type="text" name="title" placeholder="Enter Title" className="px-3 py-2 border-2 w-full rounded-md" />
         <textarea value={formData.description} onChange={onChangeHandler} name="description" placeholder="Enter Description" className="px-3 py-2 border-2 w-full rounded-md"></textarea>
@@ -58,9 +74,11 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            <Todo></Todo>
-            <Todo></Todo>
-            <Todo></Todo>
+            {
+              todoData.map((item, index) => {
+                return <Todo key={index} id={index} title={item.title} description={item.description} complete={item.isCompleted} mongoId={item._id}></Todo>
+              })
+            }
           </tbody>
         </table>
       </div>
