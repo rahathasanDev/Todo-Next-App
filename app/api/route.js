@@ -20,3 +20,23 @@ export async function POST(request){
   })
   return NextResponse.json({msg:"Todo Created"})
 }
+// delete method
+
+export async function DELETE(request){
+  const mongoId = await request.nextUrl.searchParams.get('mongoId')
+  await ToDoModel.findByIdAndDelete(mongoId)
+  
+  return NextResponse.json({msg:"Todo Deleted"})
+}
+// put method
+export async function PUT(request){
+  const mongoId = await request.nextUrl.searchParams.get('mongoId')
+  await ToDoModel.findByIdAndUpdate(mongoId,{
+    $set:{
+      isCompleted:true
+
+    }
+  })
+  
+  return NextResponse.json({msg:"Todo Completed"})
+}
