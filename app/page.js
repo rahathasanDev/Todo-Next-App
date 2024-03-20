@@ -96,6 +96,7 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
+            {/* property gulo ke pathano hocceh , i mean props hisebe pathano   then TODO component theke segulo receive/destructured kora hocce */}
             {
               todoData.map((item, index) => {
                 return <Todo key={index} id={index} title={item.title} description={item.description} complete={item.isCompleted} mongoId={item._id} deleteTodo={deleteTodo} completeTodo={completeTodo}></Todo>
