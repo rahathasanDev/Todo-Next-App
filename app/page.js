@@ -14,14 +14,14 @@ export default function Home() {
   const [loading, setLoading] = useState(false); // Loading state
 
   const fetchTodos = async () => {
-    setLoading(true); // Start loading
+    setLoading(true); // Start loading when fetching todos
     try {
       const response = await axios("/api");
       setTodoData(response.data.todos);
     } catch (error) {
       toast.error("Failed to fetch todos!");
     } finally {
-      setLoading(false); // End loading
+      setLoading(false); // End loading after fetch
     }
   };
 
@@ -33,7 +33,9 @@ export default function Home() {
         },
       });
       toast.success(response.data.msg);
-      fetchTodos();
+      // Fetch todos after deleting, without setting loading to true
+      const updatedTodos = todoData.filter((todo) => todo._id !== id);
+      setTodoData(updatedTodos); // Directly update the todoData
     } catch (error) {
       toast.error("Failed to delete todo!");
     }
@@ -51,14 +53,14 @@ export default function Home() {
         }
       );
       toast.success(response.data.msg);
-      fetchTodos();
+      fetchTodos(); // Fetch todos to update the list after completing
     } catch (error) {
       toast.error("Failed to complete todo!");
     }
   };
 
   useEffect(() => {
-    fetchTodos();
+    fetchTodos(); // Fetch todos initially
   }, []);
 
   const onChangeHandler = (e) => {
@@ -69,6 +71,7 @@ export default function Home() {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading when adding a new todo
     try {
       const response = await axios.post("/api", formData);
       toast.success(response.data.msg);
@@ -76,9 +79,11 @@ export default function Home() {
         title: "",
         description: "",
       });
-      fetchTodos();
+      fetchTodos(); // Fetch todos after adding new one
     } catch (error) {
       toast.error("Failed to add todo!");
+    } finally {
+      setLoading(false); // End loading after add request is complete
     }
   };
 
@@ -112,14 +117,12 @@ export default function Home() {
         </button>
       </form>
 
-      
       <div className="flex justify-center items-center mt-10 min-h-[60vh] px-4">
         {loading ? (
           <div className="flex justify-center items-center w-full h-full absolute top-0 left-0 mt-40">
-          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-600"></div>
-          <p className="mt-2 ml-2 text-gray-500">Todos...</p>
-        </div>
-        
+            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-600"></div>
+            <p className="mt-2 ml-2 text-gray-500">Todos...</p>
+          </div>
         ) : (
           <div className="w-full max-w-5xl bg-white shadow-lg rounded-lg">
             <h2 className="text-xl font-semibold text-gray-700 mb-4 px-6 pt-6">
@@ -183,7 +186,7 @@ export default function Home() {
                 </tbody>
               </table>
 
-              {/* For mobile  */}
+              {/* For mobile */}
               <div className="block md:hidden space-y-4 px-4">
                 {todoData.map((item, index) => (
                   <div
