@@ -16,7 +16,7 @@ const Navbar = () => {
         <Link href="/"><p>Rahat&apos;s Todo App</p></Link>
         </div>
         <div className="hidden md:flex space-x-6">
-          <Link href="#" className="text-white hover:text-yellow-300 transition duration-300">Home</Link>
+          <Link href="/" className="text-white hover:text-yellow-300 transition duration-300">Home</Link>
           <Link href="/about" className="text-white hover:text-yellow-300 transition duration-300">About</Link>
           <Link href="#services" className="text-white hover:text-yellow-300 transition duration-300">Services</Link>
           <Link href="#contact" className="text-white hover:text-yellow-300 transition duration-300">Contact</Link>
