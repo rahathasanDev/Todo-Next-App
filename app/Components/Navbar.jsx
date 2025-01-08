@@ -12,10 +12,10 @@ const Navbar = () => {
     <nav className="bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg py-4">
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="text-white text-2xl font-bold">
-          <a href="#">Rahat's Todo App</a>
+          <a href="/">Rahat's Todo App</a>
         </div>
         <div className="hidden md:flex space-x-6">
-          <a href="/" className="text-white hover:text-yellow-300 transition duration-300">Home</a>
+          <a href="#" className="text-white hover:text-yellow-300 transition duration-300">Home</a>
           <a href="/about" className="text-white hover:text-yellow-300 transition duration-300">About</a>
           <a href="#services" className="text-white hover:text-yellow-300 transition duration-300">Services</a>
           <a href="#contact" className="text-white hover:text-yellow-300 transition duration-300">Contact</a>
@@ -56,7 +56,7 @@ const Navbar = () => {
         className={`md:hidden ${isOpen ? 'block' : 'hidden'} bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-4`}
       >
         <a href="#" className="block py-2">Home</a>
-        <a href="/about" className="block py-2">About</a>
+        <a href="#about" className="block py-2">About</a>
         <a href="#services" className="block py-2">Services</a>
         <a href="#contact" className="block py-2">Contact</a>
       </div>
