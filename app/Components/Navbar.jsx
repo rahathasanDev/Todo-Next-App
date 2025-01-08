@@ -12,7 +12,7 @@ const Navbar = () => {
     <nav className="bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg py-4">
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="text-white text-2xl font-bold">
-          <a href="/">Rahat's Todo App</a>
+        <a href="/"><p>Rahat&apos;s Todo App</p></a>
         </div>
         <div className="hidden md:flex space-x-6">
           <a href="#" className="text-white hover:text-yellow-300 transition duration-300">Home</a>

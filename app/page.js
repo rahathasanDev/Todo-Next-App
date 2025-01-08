@@ -112,7 +112,7 @@ export default function Home() {
         </button>
       </form>
 
-      {/* Centered Table Section */}
+      
       <div className="flex justify-center items-center mt-10 min-h-[60vh] px-4">
         {loading ? (
           <div className="flex justify-center items-center w-full h-full absolute top-0 left-0 mt-40">
@@ -183,7 +183,7 @@ export default function Home() {
                 </tbody>
               </table>
 
-              {/* For mobile screens */}
+              {/* For mobile  */}
               <div className="block md:hidden space-y-4 px-4">
                 {todoData.map((item, index) => (
                   <div
