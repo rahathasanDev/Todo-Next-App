@@ -56,10 +56,10 @@ const Navbar = () => {
       <div
         className={`md:hidden ${isOpen ? 'block' : 'hidden'} bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-4`}
       >
-        <a href="#" className="block py-2">Home</a>
-        <a href="#about" className="block py-2">About</a>
-        <a href="#services" className="block py-2">Services</a>
-        <a href="#contact" className="block py-2">Contact</a>
+        <Link href="/" className="block py-2">Home</Link>
+        <Link href="/about" className="block py-2">About</Link>
+        <Link href="#services" className="block py-2">Services</Link>
+        <Link href="#contact" className="block py-2">Contact</Link>
       </div>
     </nav>
   );

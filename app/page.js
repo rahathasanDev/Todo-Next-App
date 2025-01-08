@@ -53,7 +53,9 @@ export default function Home() {
         }
       );
       toast.success(response.data.msg);
-      fetchTodos(); // Fetch todos to update the list after completing
+      const updatedTodos = todoData.filter((todo) => todo._id !== id);
+      setTodoData(updatedTodos); 
+      // fetchTodos(); // Fetch todos to update the list after completing
     } catch (error) {
       toast.error("Failed to complete todo!");
     }
