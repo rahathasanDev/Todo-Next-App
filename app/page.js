@@ -53,8 +53,11 @@ export default function Home() {
         }
       );
       toast.success(response.data.msg);
-      const updatedTodos = todoData.filter((todo) => todo._id !== id);
-      setTodoData(updatedTodos); 
+      // Update the state directly for the completed todo
+      const updatedTodos = todoData.map((todo) =>
+        todo._id === id ? { ...todo, isCompleted: true } : todo
+      );
+      setTodoData(updatedTodos);
       // fetchTodos(); // Fetch todos to update the list after completing
     } catch (error) {
       toast.error("Failed to complete todo!");
@@ -146,9 +149,8 @@ export default function Home() {
                   {todoData.map((item, index) => (
                     <tr
                       key={item._id}
-                      className={`${
-                        index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                      } hover:bg-gray-100 transition`}
+                      className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                        } hover:bg-gray-100 transition`}
                     >
                       <td className="px-4 py-3">{index + 1}</td>
                       <td className="px-4 py-3 font-medium text-gray-800">
@@ -159,11 +161,10 @@ export default function Home() {
                       </td>
                       <td className="px-4 py-3">
                         <span
-                          className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                            item.isCompleted
+                          className={`px-2 py-1 rounded-full text-xs font-semibold ${item.isCompleted
                               ? "bg-green-100 text-green-700"
                               : "bg-red-100 text-red-700"
-                          }`}
+                            }`}
                         >
                           {item.isCompleted ? "Completed" : "Pending"}
                         </span>
@@ -201,11 +202,10 @@ export default function Home() {
                         {item.title}
                       </h3>
                       <span
-                        className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                          item.isCompleted
+                        className={`px-2 py-1 rounded-full text-xs font-semibold ${item.isCompleted
                             ? "bg-green-100 text-green-700"
                             : "bg-red-100 text-red-700"
-                        }`}
+                          }`}
                       >
                         {item.isCompleted ? "Completed" : "Pending"}
                       </span>
